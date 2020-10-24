@@ -25,4 +25,16 @@
 --     ON DELETE CASCADE
 -- );
 
-INSERT INTO keeps (name, description, img) VALUES ("Toby the Tabby", "Its a cat", "http://placekitten.com/200/300")
+CREATE TABLE vaults 
+(
+  id INT AUTO_INCREMENT,
+  creatorId VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255),
+  isPrivate TINYINT,
+  PRIMARY KEY (id),
+
+  FOREIGN KEY (creatorId)
+    REFERENCES profiles (id)
+    ON DELETE CASCADE
+)

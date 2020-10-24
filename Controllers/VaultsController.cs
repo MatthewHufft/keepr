@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
@@ -44,8 +45,46 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    // [HttpPost]
-    // [HttpPut("{id}")]
+
+    [HttpPost]
+    [Authorize]
+    public async Task<ActionResult<Vault>> Create([FromBody] Vault newVault)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        newVault.CreatorId = userInfo.Id;
+        Vault created = _service.Create(newVault);
+        created.Creator = userInfo;
+        return Ok(created);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> Edit(int id, [FromBody] Vault update)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        update.CreatorId = userInfo.Id;
+        update.Creator = userInfo;
+        update.Id = id;
+
+        return Ok(_service.Edit(update, userInfo.Id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
     // [HttpDelete("{id}")]
 
 
