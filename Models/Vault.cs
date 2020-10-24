@@ -2,11 +2,11 @@ namespace Keepr.Models
 {
   public class Vault
   {
-    int Id { get; set; }
-    string CreatorId { get; set; }
-    string Name { get; set; }
-    string Description { get; set; }
-    bool isPrivate { get; set; }
-    Profile Creator { get; set; }
+    public int Id { get; set; }
+    public string CreatorId { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public bool IsPrivate { get; set; }
+    public Profile Creator { get; set; }
   }
 }
