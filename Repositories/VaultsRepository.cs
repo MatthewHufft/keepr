@@ -26,10 +26,10 @@ namespace Keepr.Services
       return _db.Query<Vault, Profile, Vault>(sql, (Vault, Profile) => { Vault.Creator = Profile; return Vault; }, splitOn: "id");
     }
 
-    internal Vault GetById(int vaultId)
+    internal Vault GetById(int id)
     {
       string sql = populateCreator + "WHERE v.id = @id";
-      return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) => { vault.Creator = profile; return vault; }, new { vaultId }, splitOn: "id").FirstOrDefault();
+      return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) => { vault.Creator = profile; return vault; }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
     internal int Create(Vault newVault)
@@ -37,9 +37,9 @@ namespace Keepr.Services
       // insert newVault into vaults table and return it's Id
       string sql = @"
         INSERT INTO vaults
-        (name, description, isPrivate) 
+        (creatorId, name, description, isPrivate) 
         VALUES
-        (@Name, @Description, @IsPrivate);
+        (@CreatorId, @Name, @Description, @IsPrivate);
         SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newVault);
     }
@@ -55,6 +55,12 @@ namespace Keepr.Services
         WHERE id = @Id;";
       _db.Execute(sql, update);
       return update;
+    }
+
+    internal void Remove(int id)
+    {
+      string sql = "DELETE FROM vaults WHERE id = @id";
+      _db.Execute(sql, new { id });
     }
   }
 }

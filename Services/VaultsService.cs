@@ -46,5 +46,14 @@ namespace Keepr.Services
       return _repo.Edit(update);
 
     }
+
+    internal object Delete(int id, string userId)
+    {
+      Vault original = _repo.GetById(id);
+      if (original == null) { throw new Exception("Invalid Id"); }
+      if (original.CreatorId != userId) { throw new Exception("Access Denied... This is not yours"); }
+      _repo.Remove(id);
+      return "Successfully deleted the vault";
+    }
   }
 }
