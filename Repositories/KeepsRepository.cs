@@ -43,6 +43,17 @@ namespace Keepr.Services
       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
+
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      string sql = @"
+      SELECT k.*, vk.id AS VaultKeepId
+      FROM vaultkeeps vk
+      JOIN keeps k ON k.id = vk.keepId
+      WHERE vaultId = @id";
+      return _db.Query<VaultKeepViewModel>(sql, new { id });
+    }
+
     internal void Remove(int id)
     {
       string sql = "DELETE FROM keeps WHERE id = @id";

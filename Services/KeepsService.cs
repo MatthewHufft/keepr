@@ -42,5 +42,10 @@ namespace Keepr.Services
       return "Successfully deleted the thing";
 
     }
+
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      return _repo.GetKeepsByVaultId(id);
+    }
   }
 }
