@@ -19,11 +19,12 @@ namespace Keepr.Controllers
       _service = ks;
     }
     [HttpGet]
-    public ActionResult<IEnumerable<Keep>> GetAll()
+    public async Task<ActionResult<IEnumerable<Keep>>> GetAllAsync()
     {
       try
       {
-        return Ok(_service.GetAll());
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_service.GetAll(userInfo?.Id));
       }
       catch (Exception e)
       {
@@ -62,7 +63,26 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    // [HttpPut] REVIEW Will I need an edit for keeps? 
+    [HttpPut("{id}")]
+    public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep update)
+    {
+      try
+      {
+        //gets the logged in users info and assigns as a Profile obj. 
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        update.CreatorId = userInfo.Id;
+        update.Creator = userInfo;
+        update.Id = id;
+        return Ok(_service.Edit(update, userInfo.Id));
+
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult<string>> Delete(int id)

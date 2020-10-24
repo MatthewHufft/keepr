@@ -41,23 +41,23 @@
 
 -- TRUNCATE TABLE vaults;
 
-CREATE TABLE vaultkeeps
-(
-  id INT AUTO_INCREMENT,
-  creatorId VARCHAR(255),
-  vaultId INT,
-  keepId INT,
-  PRIMARY KEY (id),
+-- CREATE TABLE vaultkeeps
+-- (
+--   id INT AUTO_INCREMENT,
+--   creatorId VARCHAR(255),
+--   vaultId INT,
+--   keepId INT,
+--   PRIMARY KEY (id),
 
-  FOREIGN KEY (creatorID)
-    REFERENCES profiles (id)
-    ON DELETE CASCADE,
+--   FOREIGN KEY (creatorID)
+--     REFERENCES profiles (id)
+--     ON DELETE CASCADE,
 
-  FOREIGN KEY (vaultId)
-    REFERENCES vaults (id)
-    ON DELETE CASCADE,
+--   FOREIGN KEY (vaultId)
+--     REFERENCES vaults (id)
+--     ON DELETE CASCADE,
 
-  FOREIGN KEY (keepId)
-    REFERENCES keeps (id)
-    ON DELETE CASCADE
-);
+--   FOREIGN KEY (keepId)
+--     REFERENCES keeps (id)
+--     ON DELETE CASCADE
+-- );

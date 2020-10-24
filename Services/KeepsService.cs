@@ -12,9 +12,10 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    internal IEnumerable<Keep> GetAll()
+    internal IEnumerable<Keep> GetAll(string userId)
     {
-      return _repo.GetAll();
+      IEnumerable<Keep> keeps = _repo.GetAll();
+      return keeps.ToList().FindAll(k => k.CreatorId == userId);
     }
 
     internal Keep GetById(int id)
@@ -37,7 +38,7 @@ namespace Keepr.Services
     {
       Keep original = _repo.GetById(id);
       if (original == null) { throw new Exception("Invalid Id"); }
-      if (original.CreatorId != userId) { throw new Exception("You cannot delete a post that is not yours"); }
+      if (original.CreatorId != userId) { throw new Exception("You cannot delete that which is not yours"); }
       _repo.Remove(id);
       return "Successfully deleted the thing";
 
@@ -46,6 +47,26 @@ namespace Keepr.Services
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
     {
       return _repo.GetKeepsByVaultId(id);
+    }
+
+    internal IEnumerable<Keep> GetKeepsByCreatorId(string profileId)
+    {
+      return _repo.GetByCreatorId(profileId);
+    }
+
+    internal object Edit(Keep update, string userId)
+    {
+      Keep original = _repo.GetById(update.Id);
+      if (original == null) { throw new Exception("Invalid Id"); }
+      if (original.CreatorId != userId) { throw new Exception("You cannot edit that which is not yours"); }
+      update.Name = update.Name == null ? original.Name : update.Name;
+      update.Description = update.Description == null ? original.Description : update.Description;
+      update.Img = original.Img;
+      update.Views = original.Views;
+      update.Shares = original.Shares;
+      update.Keeps = original.Keeps;
+
+      return _repo.Edit(update);
     }
   }
 }

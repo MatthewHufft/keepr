@@ -54,10 +54,36 @@ namespace Keepr.Services
       return _db.Query<VaultKeepViewModel>(sql, new { id });
     }
 
+    internal IEnumerable<Keep> GetByCreatorId(string profileId)
+    {
+      // @"
+      // SELECT
+      // keep.*,
+      // profile.*
+      // FROM keeps keep
+      // JOIN profiles profile ON keep.creatorId = profile.id"
+
+      string sql = populateCreator + " WHERE creatorId = @profileId;";
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { profileId }, splitOn: "id");
+    }
+
     internal void Remove(int id)
     {
       string sql = "DELETE FROM keeps WHERE id = @id";
       _db.Execute(sql, new { id });
+    }
+
+    internal object Edit(Keep update)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+      name = @Name,
+      description = @Description
+      WHERE id = @Id;
+      ";
+      _db.Execute(sql, update);
+      return update;
     }
   }
 }

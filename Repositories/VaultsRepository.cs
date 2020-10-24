@@ -62,5 +62,11 @@ namespace Keepr.Services
       string sql = "DELETE FROM vaults WHERE id = @id";
       _db.Execute(sql, new { id });
     }
+
+    internal IEnumerable<Vault> GetVaultsByCreatorId(string id)
+    {
+      string sql = populateCreator + " WHERE creatorId = @id;";
+      return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) => { vault.Creator = profile; return vault; }, new { id }, splitOn: "id");
+    }
   }
 }

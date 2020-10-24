@@ -22,7 +22,7 @@ namespace Keepr.Services
     {
       Vault vault = _repo.GetById(vaultId);
       if (vault == null) { throw new Exception("Invalid Id"); }
-      if (vault.CreatorId != userId && vault.IsPrivate == false) { throw new Exception("Access Denied. You are forbidden from accessing that which is not yours."); }
+      if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. You are forbidden from accessing that which is not yours."); }
       return vault;
 
     }
@@ -54,6 +54,11 @@ namespace Keepr.Services
       if (original.CreatorId != userId) { throw new Exception("Access Denied... This is not yours"); }
       _repo.Remove(id);
       return "Successfully deleted the vault";
+    }
+
+    internal IEnumerable<Vault> GetVaultsByCreatorId(string id)
+    {
+      return _repo.GetVaultsByCreatorId(id);
     }
   }
 }
