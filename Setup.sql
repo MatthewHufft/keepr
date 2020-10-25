@@ -37,7 +37,7 @@
 --   FOREIGN KEY (creatorId)
 --     REFERENCES profiles (id)
 --     ON DELETE CASCADE
--- )
+-- );
 
 -- TRUNCATE TABLE vaults;
 
@@ -61,3 +61,10 @@
 --     REFERENCES keeps (id)
 --     ON DELETE CASCADE
 -- );
+
+-- TRUNCATE TABLE vaultkeeps;
+
+-- DROP TABLE vaultkeeps;
+-- DROP TABLE keeps;
+-- DROP TABLE vaults;
+
