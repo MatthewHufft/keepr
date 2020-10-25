@@ -15,7 +15,7 @@ namespace Keepr.Services
     internal IEnumerable<Keep> GetAll(string userId)
     {
       IEnumerable<Keep> keeps = _repo.GetAll();
-      return keeps.ToList().FindAll(k => k.CreatorId == userId);
+      return keeps;
     }
 
     internal Keep GetById(int id)
