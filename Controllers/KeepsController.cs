@@ -19,7 +19,7 @@ namespace Keepr.Controllers
       _service = ks;
     }
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Keep>>> GetAllAsync()
+    public async Task<ActionResult<IEnumerable<Keep>>> GetAll()
     {
       try
       {
@@ -45,6 +45,7 @@ namespace Keepr.Controllers
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<Keep>> Create([FromBody] Keep newKeep)
     {
       try
@@ -64,6 +65,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep update)
     {
       try

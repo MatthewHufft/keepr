@@ -18,11 +18,11 @@ namespace Keepr.Services
       return vaults.ToList().FindAll(v => v.CreatorId == userId || v.IsPrivate == false);
     }
 
-    internal object GetById(string userId, int vaultId)
+    internal Vault GetById(string userId, int vaultId)
     {
       Vault vault = _repo.GetById(vaultId);
       if (vault == null) { throw new Exception("Invalid Id"); }
-      if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. You are forbidden from accessing that which is not yours."); }
+      if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. That is private."); }
       return vault;
 
     }
