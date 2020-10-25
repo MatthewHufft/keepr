@@ -21,6 +21,9 @@ export default new Vuex.Store({
     setVaults(state, vaults){
       state.vaults = vaults
     },
+    deleteVault(state, vault){
+      state.vaults = state.vaults.filter(v => v.id != vault.id)
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -43,6 +46,14 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profiles/" + profileId + "/vaults");
         commit("setVaults",res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteVault({commit}, vaultId) {
+      try {
+        let res = await api.delete("vaults/" + vaultId);
+        commit("deleteVault", res.data);
       } catch (error) {
         console.error(error);
       }

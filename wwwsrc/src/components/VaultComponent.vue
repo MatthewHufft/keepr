@@ -1,5 +1,6 @@
 <template>
-  <div class="card col-3">
+  <div class="vault-comp card col-3">
+    <i class="fa fa-times text-danger" v-if="this.$route.params.profileId == vaultProp.creatorId" aria-hidden="true" role="button" @click="deleteVault"></i>
     <h3>{{vaultProp.name}}</h3>
     <img src="//placehold.it/200x200" alt="">
   </div>
@@ -18,7 +19,9 @@ name: "",
     
   },
   methods:{
-
+    deleteVault(){
+      this.$store.dispatch("deleteVault", this.vaultProp.id)
+    }
   },
   props: ["vaultProp"],
   components:{}

@@ -53,7 +53,7 @@ namespace Keepr.Services
       if (original == null) { throw new Exception("Invalid Id"); }
       if (original.CreatorId != userId) { throw new Exception("Access Denied... This is not yours"); }
       _repo.Remove(id);
-      return "Successfully deleted the vault";
+      return original;
     }
 
     internal IEnumerable<Vault> GetVaultsByCreatorId(string id)
