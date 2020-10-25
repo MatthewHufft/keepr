@@ -24,6 +24,12 @@ export default new Vuex.Store({
     deleteVault(state, vault){
       state.vaults = state.vaults.filter(v => v.id != vault.id)
     },
+    deleteKeep(state, keep){
+      state.keeps = state.keeps.filter(k => k.id != keep.id)
+    },
+    createVault(state, vault){
+      state.vaults.push(vault)
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -54,6 +60,26 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("vaults/" + vaultId);
         commit("deleteVault", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteKeep({commit}, keepId) {
+      try {
+        let res = await api.delete("keeps/" + keepId);
+        commit("deleteKeep", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async createVault({commit}, newVault) {
+      try {
+        let res = await api.post("vaults", newVault);
+        commit("createVault", res.data);
+        // @ts-ignore
+        $("#newVaultModal").hide()
+        // @ts-ignore
+        $(".modal-backdrop").hide()
       } catch (error) {
         console.error(error);
       }

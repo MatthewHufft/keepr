@@ -40,7 +40,7 @@ namespace Keepr.Services
       if (original == null) { throw new Exception("Invalid Id"); }
       if (original.CreatorId != userId) { throw new Exception("You cannot delete that which is not yours"); }
       _repo.Remove(id);
-      return "Successfully deleted the thing";
+      return original;
 
     }
 
