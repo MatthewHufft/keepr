@@ -16,11 +16,12 @@ export default {
     if (this.$auth.isAuthenticated) {
       setBearer(this.$auth.bearer);
       this.$store.dispatch("getProfile")
+      this.$store.dispatch("getProfileVaults", this.$auth.userInfo.id);
       //NOTE if you want to do something everytime the user logs in, do so here
     }
   },
   components: {
-    Navbar,
+    Navbar
   },
 };
 </script>

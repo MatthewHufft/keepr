@@ -17,7 +17,10 @@ export default new Vuex.Store({
     },
     setKeeps(state, keeps){
       state.keeps = keeps
-    }
+    },
+    setVaults(state, vaults){
+      state.vaults = vaults
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -35,6 +38,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    async getProfileVaults({commit}, profileId) {
+      try {
+        let res = await api.get("profiles/" + profileId + "/vaults");
+        commit("setVaults",res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 });
