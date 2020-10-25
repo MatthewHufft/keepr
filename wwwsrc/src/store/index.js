@@ -30,6 +30,9 @@ export default new Vuex.Store({
     createVault(state, vault){
       state.vaults.push(vault)
     },
+    createKeep(state, keep){
+      state.keeps.push(keep)
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -78,6 +81,18 @@ export default new Vuex.Store({
         commit("createVault", res.data);
         // @ts-ignore
         $("#newVaultModal").hide()
+        // @ts-ignore
+        $(".modal-backdrop").hide()
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async createKeep({commit}, newKeep) {
+      try {
+        let res = await api.post("keeps", newKeep);
+        commit("createKeep", res.data);
+        // @ts-ignore
+        $("#newKeepModal").hide()
         // @ts-ignore
         $(".modal-backdrop").hide()
       } catch (error) {
