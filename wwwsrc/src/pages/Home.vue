@@ -1,6 +1,6 @@
 <template>
   <div class="home container-fluid">
-    <h1>Welcome</h1>
+    <h1>Home</h1>
     <div class="row">
       <KeepComponent v-for="keep in keeps" :key="keep.id" :keepProp="keep"/>
     </div>

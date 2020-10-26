@@ -1,5 +1,6 @@
 <template>
   <div class="vault-comp card col-3">
+    <router-link :to="{name:'VaultDetails', params:{vaultId: vaultProp.id}}">Open Vault</router-link>
     <i class="fa fa-times text-danger" v-if="this.$route.params.profileId == vaultProp.creatorId" aria-hidden="true" role="button" @click="deleteVault"></i>
     <h3>{{vaultProp.name}}</h3>
     <img src="//placehold.it/200x200" alt="">
