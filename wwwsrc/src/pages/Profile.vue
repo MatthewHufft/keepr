@@ -7,6 +7,7 @@
       </div>
     </div>
     <div class="row">
+      <!-- New Vault Modal -->
       <div class="col-12 d-flex justify-content-end">
         <button
               class="btn btn-danger m-2 bg-danger text-white"
@@ -59,6 +60,7 @@
                 </div>
               </div>
         </div>
+        <!-- New Keep Modal -->
         <button
               class="btn btn-danger m-2 bg-danger text-white"
               type="button"
@@ -86,21 +88,25 @@
                       class="form-control forms-custom"
                       type="text"
                       placeholder="Keep Name... "
-                      v-model="newKeep.name"
+                      v-model="payload.newKeep.name"
                       required
                     />
                     <input
                       class="form-control forms-custom"
                       type="text"
                       placeholder="Description ..."
-                      v-model="newKeep.description"
+                      v-model="payload.newKeep.description"
                     />
                     <input
                       class="form-control forms-custom"
                       type="text"
                       placeholder="Image URL..."
-                      v-model="newKeep.img"
+                      v-model="payload.newKeep.img"
                     />
+                    <select class="form-control" v-model="payload.newVK.vaultId">
+                      <option value="" selected disabled>Choose Vault to add to:</option>
+                      <option v-for="vault in vaults" :value="vault.id" :key="vault.id" >{{vault.name}}</option>
+                    </select>
                     <div class="modal-footer justify-content-center">
                       <button
                         type="submit"
@@ -132,10 +138,14 @@ mounted(){
         description: "",
         isPrivate: false
       },
-      newKeep:{
+      payload:{
+        newKeep:{
         name: "",
         description: "",
-        img: ""
+        img: ""},
+        newVK:{
+        keepId: 0,
+        vaultId: 0}
       },
     }
   },
@@ -153,8 +163,9 @@ mounted(){
       this.newVault = {name: "", description: "", isPrivate: false};
     },
     addKeep(){
-      this.$store.dispatch("createKeep", this.newKeep);
+      this.$store.dispatch("createKeep", this.payload)
       this.newKeep = {name: "", description: "", img: ""};
+      this.newVK = {keepId: 0, vaultId: 0};
     }
   },
   props: [""],

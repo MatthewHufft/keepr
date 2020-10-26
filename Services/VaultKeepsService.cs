@@ -13,7 +13,8 @@ namespace Keepr.Services
 
     internal VaultKeep Create(VaultKeep newVK)
     {
-      newVK.Id = _repo.Create(newVK);
+      int id = _repo.Create(newVK);
+      newVK.Id = id;
       return newVK;
     }
 

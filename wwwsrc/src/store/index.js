@@ -9,7 +9,7 @@ export default new Vuex.Store({
     profile: {},
     vaults: [],
     keeps: [],
-    vaultKeeps: []
+    activeKeeps: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -87,14 +87,24 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async createKeep({commit}, newKeep) {
+    async createKeep({commit, dispatch}, payload) {
       try {
-        let res = await api.post("keeps", newKeep);
+        let res = await api.post("keeps", payload.newKeep);
+        console.log(res.data);
+        payload.newVK.keepId = res.data.id;
         commit("createKeep", res.data);
+        dispatch("createVaultKeep", payload.newVK);
         // @ts-ignore
         $("#newKeepModal").hide()
         // @ts-ignore
         $(".modal-backdrop").hide()
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async createVaultKeep({commit}, newVK) {
+      try {
+        await api.post("vaultkeeps", newVK);
       } catch (error) {
         console.error(error);
       }

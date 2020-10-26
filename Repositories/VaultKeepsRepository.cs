@@ -15,13 +15,12 @@ namespace Keepr.Services
     internal int Create(VaultKeep newVK)
     {
       string sql = @"
-      INSERT INTO vaultkeeps
-      (creatorId, vaultId, keepId)
-      VALUES
-      (@CreatorId, @KeepId, @VaultId);
-      SELECT LAST_INSERT_ID();";
+        INSERT INTO vaultkeeps
+        (creatorId, keepId, vaultId)
+        VALUES
+        (@CreatorId, @KeepId, @VaultId);
+        SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newVK);
-
     }
 
     internal VaultKeep GetById(int id)

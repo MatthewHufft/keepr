@@ -17,7 +17,12 @@ const routes = [
     path: "/profile/:profileId",
     name: "Profile",
     component: Profile,
-  }
+  },
+  {
+    path: "/vaults/:Id",
+    name: "VaultDetails",
+    component: Profile,
+  },
 ];
 
 const router = new VueRouter({
