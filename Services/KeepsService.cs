@@ -62,9 +62,6 @@ namespace Keepr.Services
       update.Name = update.Name == null ? original.Name : update.Name;
       update.Description = update.Description == null ? original.Description : update.Description;
       update.Img = original.Img;
-      update.Views = original.Views;
-      update.Shares = original.Shares;
-      update.Keeps = original.Keeps;
 
       return _repo.Edit(update);
     }

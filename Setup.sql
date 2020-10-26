@@ -15,9 +15,9 @@
 --   name VARCHAR(255) NOT NULL,
 --   description VARCHAR(255) DEFAULT "",
 --   img VARCHAR(255) NOT NULL,
---   views int DEFAULT 0,
---   shares int DEFAULT 0,
---   keeps int DEFAULT 1,
+--   views INT,
+--   shares INT,
+--   keeps INT,
 --   PRIMARY KEY (id),
 
 --   FOREIGN KEY (creatorId)
@@ -67,4 +67,3 @@
 -- DROP TABLE vaultkeeps;
 -- DROP TABLE keeps;
 -- DROP TABLE vaults;
-

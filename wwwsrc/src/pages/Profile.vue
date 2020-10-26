@@ -103,7 +103,7 @@
                       placeholder="Image URL..."
                       v-model="payload.newKeep.img"
                     />
-                    <select class="form-control" v-model="payload.newVK.vaultId">
+                    <select class="form-control" v-model="payload.newVK.vaultId" required>
                       <option value="" selected disabled>Choose Vault to add to:</option>
                       <option v-for="vault in vaults" :value="vault.id" :key="vault.id" >{{vault.name}}</option>
                     </select>

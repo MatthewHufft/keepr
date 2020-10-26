@@ -36,6 +36,10 @@ export default new Vuex.Store({
     createKeep(state, keep){
       state.keeps.push(keep)
     },
+    updateKeep(state, update){
+      let currentKeep = state.keeps.find(k => k.id == update.id)
+      currentKeep = update;
+    }
   },
   actions: {
     async getProfile({ commit }) {
@@ -120,5 +124,13 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async updateKeep({commit}, update){
+      try {
+        await api.put("keeps/"+ update.id, update);
+        commit("updateKeep", update);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
 });

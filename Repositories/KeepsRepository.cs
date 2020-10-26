@@ -79,7 +79,10 @@ namespace Keepr.Services
       UPDATE keeps
       SET
       name = @Name,
-      description = @Description
+      description = @Description,
+      views = @Views,
+      shares = @Shares,
+      keeps = @Keeps
       WHERE id = @Id;
       ";
       _db.Execute(sql, update);
