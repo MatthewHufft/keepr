@@ -22,7 +22,7 @@ namespace Keepr.Services
     {
       Vault vault = _repo.GetById(vaultId);
       if (vault == null) { throw new Exception("Invalid Id"); }
-      if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. That is private."); }
+      // if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. That is private."); }
       return vault;
 
     }

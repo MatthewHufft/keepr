@@ -65,7 +65,6 @@ namespace Keepr.Controllers
       }
     }
     [HttpPut("{id}")]
-    [Authorize]
     public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep update)
     {
       try

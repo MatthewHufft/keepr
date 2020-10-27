@@ -58,7 +58,6 @@ namespace Keepr.Services
     {
       Keep original = _repo.GetById(update.Id);
       if (original == null) { throw new Exception("Invalid Id"); }
-      if (original.CreatorId != userId) { throw new Exception("You cannot edit that which is not yours"); }
       update.Name = update.Name == null ? original.Name : update.Name;
       update.Description = update.Description == null ? original.Description : update.Description;
       update.Img = original.Img;

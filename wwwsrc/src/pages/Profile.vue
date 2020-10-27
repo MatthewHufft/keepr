@@ -130,6 +130,7 @@ import VaultComponent from "../components/VaultComponent.vue";
 export default {
 name: "Profile",
 mounted(){
+    this.$store.dispatch("getProfileVaults", this.$route.params.profileId);
   },
   data(){
     return{

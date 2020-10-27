@@ -8,9 +8,15 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" :id="'#keepModal'+ keepProp.id + 'Label'">{{keepProp.name}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="btn-group dropright">
+              <i class="fa fa-ellipsis-v btn big-button" aria-hidden="true" role="button" data-toggle="dropdown"></i>
+              <div class="dropdown-menu ml-1 text-center">
+                <p class="btn" @click="deleteVaultKeep">Remove Keep</p>
+              </div>
+            </div>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
-            </button>
+            </button> -->
           </div>
           <div class="modal-body">
             <div class="row">
@@ -27,14 +33,15 @@
                     <option value="" selected disabled>Choose Vault to add to:</option>
                     <option v-for="vault in vaults" :value="vault.id" :key="vault.id" >{{vault.name}}</option>
                   </select>
+                  <button class="btn btn-primary">Add to Vault</button>
                 </form>
               </div>
             </div>
           </div>
           <div class="modal-footer justify-content-between">
             <div class="d-flex">
-              <img :src="keepProp.creator.picture" alt="" width="25%">
-              <p class="align-self-end ml-1">{{keepProp.creator.name}}</p> 
+              <!-- <img :src="keepProp.creator" alt="" width="25%">
+              <p class="align-self-end ml-1">{{keepProp.creator.name}}</p>  -->
             </div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -80,6 +87,9 @@ export default {
       this.newVK.keepId = this.keepProp.id;
       this.$store.dispatch("createVaultKeep", this.newVK);
       this.newVK = {keepId: 0, vaultId: 0};
+    },
+    deleteVaultKeep(){
+      this.$store.dispatch("deleteVaultKeep", this.keepProp.vaultKeepId)
     }
   },
   props: ["keepProp"],

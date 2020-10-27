@@ -124,6 +124,13 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async deleteVaultKeep({commit}, VKId) {
+      try {
+        await api.delete("vaultkeeps/" + VKId, VKId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async updateKeep({commit}, update){
       try {
         await api.put("keeps/"+ update.id, update);
