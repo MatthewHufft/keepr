@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-12 d-flex flex-column align-items-center">
         <img :src="this.profile.picture" class="rounded" alt="">
-        <h2>Name:{{this.profile.name}}</h2>
+        <h2>{{this.profile.name}}</h2>
+          <p>Keeps: {{this.keeps.length}}  |  Vaults: {{this.vaults.length}}</p>
       </div>
     </div>
     <div class="row">
@@ -134,7 +135,9 @@ import VaultComponent from "../components/VaultComponent.vue";
 export default {
 name: "Profile",
 mounted(){
+    this.$store.dispatch("getActiveProfile", this.$route.params.profileId);
     this.$store.dispatch("getProfileVaults", this.$route.params.profileId);
+    this.$store.dispatch("getProfileKeeps", this.$route.params.profileId);
   },
   data(){
     return{
@@ -159,8 +162,12 @@ mounted(){
       return this.$store.state.vaults;
     },
     profile(){
-      return this.$store.state.profile;
+      return this.$store.state.activeProfile;
+    },
+    keeps(){
+      return this.$store.state.keeps;
     }
+
   },
   methods:{
     addVault(){

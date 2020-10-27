@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     profile: {},
+    activeProfile: {},
     vaults: [],
     keeps: [],
     activeKeeps: []
@@ -14,6 +15,9 @@ export default new Vuex.Store({
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
+    },
+    setActiveProfile(state, profile){
+      state.activeProfile = profile;
     },
     setKeeps(state, keeps){
       state.keeps = keeps
@@ -50,6 +54,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async getActiveProfile({commit}, profileId) {
+      try {
+        let res = await api.get("profiles/" + profileId);
+        commit("setActiveProfile",res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async getKeeps({commit}) {
       try {
         let res = await api.get("keeps");
@@ -70,6 +82,14 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profiles/" + profileId + "/vaults");
         commit("setVaults",res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getProfileKeeps({commit}, profileId) {
+      try {
+        let res = await api.get("profiles/" + profileId + "/keeps");
+        commit("setKeeps", res.data);
       } catch (error) {
         console.error(error);
       }
