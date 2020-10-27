@@ -54,7 +54,8 @@ namespace Keepr.Controllers
     {
       try
       {
-        return Ok(_keepService.GetKeepsByVaultId(id));
+        IEnumerable<VaultKeepViewModel> keeps = _keepService.GetKeepsByVaultId(id);
+        return Ok(keeps);
       }
       catch (Exception e)
       {

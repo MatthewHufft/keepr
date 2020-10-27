@@ -47,11 +47,14 @@ namespace Keepr.Services
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
     {
       string sql = @"
-      SELECT k.*, vk.id AS VaultKeepId
+      SELECT k.*, p.*, vk.id AS VaultKeepId
       FROM vaultkeeps vk
       JOIN keeps k ON k.id = vk.keepId
+      JOIN profiles p ON k.creatorId = p.id
       WHERE vaultId = @id";
-      return _db.Query<VaultKeepViewModel>(sql, new { id });
+      return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { id }, splitOn: "id");
+      // IEnumerable<VaultKeepViewModel> keeps = _db.Query<VaultKeepViewModel>(sql, new { id });
+
     }
 
     internal IEnumerable<Keep> GetByCreatorId(string profileId)

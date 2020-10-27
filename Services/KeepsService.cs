@@ -46,7 +46,8 @@ namespace Keepr.Services
 
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
     {
-      return _repo.GetKeepsByVaultId(id);
+      IEnumerable<VaultKeepViewModel> keeps = _repo.GetKeepsByVaultId(id);
+      return keeps;
     }
 
     internal IEnumerable<Keep> GetKeepsByCreatorId(string profileId)
