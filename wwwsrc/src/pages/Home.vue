@@ -2,7 +2,9 @@
   <div class="home container-fluid">
     <h1>Home</h1>
     <div class="row">
-      <KeepComponent v-for="keep in keeps" :key="keep.id" :keepProp="keep"/>
+      <div class="card-columns">
+        <KeepComponent v-for="keep in keeps" :key="keep.id" :keepProp="keep"/>
+      </div>
     </div>
 
   </div>

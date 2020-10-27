@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h1 class="border border-primary">Home</h1>
@@ -63,4 +63,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+navbar {
+  background-color: rgba(255, 255, 255, 0);
+}
+</style>

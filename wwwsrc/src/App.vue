@@ -1,14 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="app-background">
     <navbar />
-      <transition
-              appear
-              enter-active-class="animated fadeInRight"
-              leave-active-class="animated fadeOutLeft"
-              mode="out-in"
-            >
       <router-view />
-    </transition>
   </div>
 </template>
 
@@ -36,4 +29,11 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+.app-background{
+  background: rgb(238,244,249);
+  background: linear-gradient(127deg, rgba(238,244,249,1) 0%, rgba(231,236,240,1) 50%, rgba(238,244,249,1) 100%);
+}
+#app{
+  min-height: 100vh;
+}
 </style>

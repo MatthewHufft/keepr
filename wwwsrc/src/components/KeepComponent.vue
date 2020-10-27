@@ -1,17 +1,16 @@
 <template>
-  <div class="card col-3">
-    <!-- Delete button needs to move into modal -->
-    <i class="fa fa-times text-danger" v-if="profile.id == keepProp.creatorId" aria-hidden="true" role="button" @click="deleteKeep"></i>
-    <img :src="keepProp.img" role="button" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount">
+  <div class="card">
+    <img class="card-img" :src="keepProp.img" role="button" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount">
     <div class="modal fade" :id="'keepModal'+ keepProp.id" tabindex="-1" :aria-labelledby="'#keepModal'+ keepProp.id + 'Label'" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" :id="'#keepModal'+ keepProp.id + 'Label'">{{keepProp.name}}</h5>
             <div class="btn-group dropright">
-              <i class="fa fa-ellipsis-v btn big-button" aria-hidden="true" role="button" data-toggle="dropdown"></i>
+              <i v-if="this.profile.id == this.keepProp.creatorId" class="fa fa-ellipsis-v btn big-button" aria-hidden="true" role="button" data-toggle="dropdown"></i>
               <div class="dropdown-menu ml-1 text-center">
-                <p class="btn" @click="deleteVaultKeep">Remove Keep</p>
+                <p v-if="this.$route.name == 'VaultDetails'" class="btn" @click="deleteVaultKeep">Remove Keep</p>
+                <p v-if="this.$route.name == 'Home' && this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
               </div>
             </div>
             <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -98,8 +97,9 @@ export default {
 </script>
 
 <style scoped>
-img{
-  
+.card-img{
+  position: relative;
+  width:100%;
 }
 
 </style>

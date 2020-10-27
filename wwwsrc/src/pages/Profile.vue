@@ -119,7 +119,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row d-flex justify-content-around">
     <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
     </div>
   </div>
