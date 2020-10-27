@@ -27,7 +27,7 @@
               <div class="col-8">
                 <img :src="keepProp.img" alt="" width="100%">
               </div>
-              <div class="col-4">
+              <div class="col-4 d-flex flex-column">
                 <p>Description: {{keepProp.description}}</p>
                 <p>Kept: {{keepProp.keeps}}</p>
                 <p>Views: {{keepProp.views}}</p>
@@ -43,9 +43,9 @@
             </div>
           </div>
           <div class="modal-footer justify-content-between">
-            <div class="d-flex">
-              <!-- <img :src="keepProp.creator" alt="" width="25%">
-              <p class="align-self-end ml-1">{{keepProp.creator.name}}</p>  -->
+            <div class="d-flex" @click="viewProfile">
+              <img :src="keepProp.creator.picture" alt="" width="25%">
+              <p class="align-self-end ml-1">{{keepProp.creator.name}}</p> 
             </div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -94,6 +94,11 @@ export default {
     },
     deleteVaultKeep(){
       this.$store.dispatch("deleteVaultKeep", this.keepProp.vaultKeepId)
+    },
+    viewProfile(){
+      $("#keepModal").hide();
+      $(".modal-backdrop").hide();
+      this.$router.push({name:'Profile', params:{profileId: this.keepProp.creatorId}})
     }
   },
   props: ["keepProp"],

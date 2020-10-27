@@ -1,6 +1,10 @@
 <template>
-  <div class="container-fluid d-flex">
-    <KeepComponent v-for="keep in activeKeeps" :key="keep.id" :keepProp="keep"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card-columns">
+        <KeepComponent v-for="keep in activeKeeps" :key="keep.id" :keepProp="keep"/>
+      </div>
+    </div>
   </div>
 </template>
 
