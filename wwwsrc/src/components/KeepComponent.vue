@@ -1,6 +1,11 @@
 <template>
-  <div class="card">
-    <img class="card-img" :src="keepProp.img" role="button" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount">
+  <div class="card keep-card">
+    <div class="trans-box" role="button" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount"></div>
+    <div class="creator-deets d-flex">
+      <img class="avatar " :src="keepProp.creator.picture" alt="">
+      <p class="text-light ml-3 hide">{{keepProp.creator.name}}</p>
+    </div>
+    <img class="card-img" :src="keepProp.img" >
     <div class="modal fade" :id="'keepModal'+ keepProp.id" tabindex="-1" :aria-labelledby="'#keepModal'+ keepProp.id + 'Label'" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -97,9 +102,31 @@ export default {
 </script>
 
 <style scoped>
-.card-img{
+.keep-card{
   position: relative;
+}
+.card-img{
   width:100%;
 }
+.avatar{
+  width: 15%;
+}
+.creator-deets{
+  position: absolute;
+  z-index: 2;
+  bottom: 5px;
+  left: 5px;
+}
+.trans-box{
+  position:absolute;
+  z-index: 1;
+  width: 100%;
+  height:100%;
+}
+.trans-box:hover{
+  background-color: rgba(7, 7, 7, 0.596);
+  cursor: pointer;
+}
+
 
 </style>
