@@ -80,6 +80,8 @@ export default {
   },
   methods:{
     deleteKeep(){
+     $("#keepModal").hide();
+     $(".modal-backdrop").hide();
      this.$store.dispatch("deleteKeep", this.keepProp.id)
     },
     updateViewCount(){

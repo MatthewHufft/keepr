@@ -1,15 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <h1 class="border border-primary">Home</h1>
-      </div>
-    </router-link>
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Profile', params: {profileId: this.profile.id}}">
-      <div class="d-flex flex-column align-items-center">
-        <h1 class="border border-primary">Profile</h1>
-      </div>
-    </router-link>
+  <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+      <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+        <div class="d-flex align-items-center">
+          <img src="../assets/lock.png" width="50px" alt="lockLogo">
+        </div>
+      </router-link>
+      
     <button
       class="navbar-toggler"
       type="button"
@@ -22,6 +18,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+      <router-link class="navbar-brand d-flex" :to="{ name: 'Profile', params: {profileId: this.profile.id}}">
+        <div class="d-flex flex-column align-items-center">
+          <img :src="this.profile.picture" class="rounded-circle w-50" alt="">
+        </div>
+      </router-link>
       <span class="navbar-text">
         <!-- Consider changing this to a profile picture -->
         <button

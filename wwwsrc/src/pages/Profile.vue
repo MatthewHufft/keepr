@@ -45,11 +45,15 @@
                       placeholder="Description ..."
                       v-model="newVault.description"
                     />
-                    <input
-                      class="form-control forms-custom"
-                      type="checkbox"
-                      v-model="newVault.isPrivate"
-                    />
+                    <div class="form-check form-check-inline">
+                      <label class="text-dark" for="isPrivateCheckbox">Private Vault</label>
+                      <input
+                        name="isPrivateCheckbox"
+                        class="form-control"
+                        type="checkbox"
+                        v-model="newVault.isPrivate"
+                      />
+                    </div>
                     <div class="modal-footer justify-content-center">
                       <button
                         type="submit"
