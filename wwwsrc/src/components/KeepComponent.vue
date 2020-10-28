@@ -123,6 +123,9 @@ export default {
   vertical-align: top;
   width:100%;
   border-radius: 10px;
+  box-shadow: 6px 6px 12px #171818, 
+             -5px -5px 12px #333436;
+
 }
 .avatar{
   height: 10%;
@@ -140,7 +143,10 @@ export default {
 .keep-card{
   position: relative;
   display: inline-block;
-  background-color: rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  background: #252627;
+  box-shadow:   10px 10px 20px #171818, 
+             -10px -10px 20px #333436;
 }
 .overlay{
   transition: 400ms;

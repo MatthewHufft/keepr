@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+  <nav class="navbar navbar-expand-lg d-flex justify-content-between sticky-top">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex align-items-center">
           <img src="../assets/lock.png" width="50px" alt="lockLogo">
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style>
-navbar {
-  background-color: rgba(255, 255, 255, 0);
+.navbar {
+  background-color:hsla(210, 3%, 15%, 0.904);
 }
 </style>

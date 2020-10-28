@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
     <div class="row">
-      <div class="card-columns">
+      <div class="card-columns w-75 offset-1">
         <KeepComponent v-for="keep in keeps" :key="keep.id" :keepProp="keep"/>
       </div>
     </div>

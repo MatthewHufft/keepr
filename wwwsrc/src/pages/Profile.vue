@@ -124,8 +124,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="card-columns">
+    <div class="row w-75 offset-1">
+      <div class="card-columns ">
         <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
       </div>
     </div>
