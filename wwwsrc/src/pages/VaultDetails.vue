@@ -1,8 +1,14 @@
 <template>
   <div class="vault container-fluid">
     <div class="row">
-      <div class="col-12 text-center text-light mt-3 " >
+      <div class="col-12 d-flex justify-content-center text-light mt-3 " >
         <h1>{{this.activeVault.name}}</h1>
+        <div class="btn-group dropright">
+          <i  class="fa fa-ellipsis-v btn text-light" aria-hidden="true" role="button" data-toggle="dropdown"></i>
+          <div class="dropdown-menu ml-1 text-center">
+            <p class="btn" @click="deleteVault">Delete Vault</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row mt-5" v-if="activeKeeps.length == 0">
@@ -39,7 +45,9 @@ name: "vault-details",
     },
   },
   methods:{
-
+    deleteVault(){
+      this.$store.dispatch("deleteVault", this.activeVault.id)
+    }
   },
   props: ["keepProp"],
   components:{KeepComponent}

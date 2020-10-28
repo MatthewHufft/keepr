@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router/index.js"
 import { api } from "../services/AxiosService.js";
+import ns from "../services/NotificationService";
 
 Vue.use(Vuex);
 
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     deleteKeep(state, keep){
       state.keeps = state.keeps.filter(k => k.id != keep.id)
+    },
+    deleteVaultKeep(state, VKId){
+      state.activeKeeps = state.activeKeeps.filter(k => k.vaultKeepId != VKId)
     },
     createVault(state, vault){
       state.vaults.push(vault)
@@ -113,16 +117,38 @@ export default new Vuex.Store({
     },
     async deleteVault({commit}, vaultId) {
       try {
-        let res = await api.delete("vaults/" + vaultId);
-        commit("deleteVault", res.data);
+        if(await ns.confirmAction("Are you sure you want to delete this vault?")){
+          let res = await api.delete("vaults/" + vaultId);
+          commit("deleteVault", res.data);
+          ns.toast("Vault deleted successfully", 1500)
+          router.push({ name: "Home" });
+        }
       } catch (error) {
         console.error(error);
       }
     },
     async deleteKeep({commit}, keepId) {
       try {
-        let res = await api.delete("keeps/" + keepId);
-        commit("deleteKeep", res.data);
+        if(await ns.confirmAction("Are you sure you want to delete this keep?", "This will remove it from all vaults")){
+          let res = await api.delete("keeps/" + keepId);
+          commit("deleteKeep", res.data);
+          ns.toast("Keep deleted successfully", 1500)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteVaultKeep({commit}, VKId) {
+      try {
+        if(await ns.confirmAction("Are you sure you want to remove this keep?")){
+          await api.delete("vaultkeeps/" + VKId, VKId);
+          commit("deleteVaultKeep", VKId);
+          // @ts-ignore
+          $("#newKeepModal").hide()
+          // @ts-ignore
+          $(".modal-backdrop").hide()
+          ns.toast("Keep removed from vault")
+        }
       } catch (error) {
         console.error(error);
       }
@@ -157,17 +183,12 @@ export default new Vuex.Store({
     async createVaultKeep({commit}, newVK) {
       try {
         await api.post("vaultkeeps", newVK);
+        ns.toast("Added to vault successfully")
       } catch (error) {
         console.error(error);
       }
     },
-    async deleteVaultKeep({commit}, VKId) {
-      try {
-        await api.delete("vaultkeeps/" + VKId, VKId);
-      } catch (error) {
-        console.error(error);
-      }
-    },
+    
     async updateKeep({commit}, update){
       try {
         await api.put("keeps/"+ update.id, update);

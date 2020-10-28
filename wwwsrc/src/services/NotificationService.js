@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 export default class NotificationService {
   static async confirmAction(
     title = "Are you sure?",
-    text = "You cant go back from here!"
+    text = ""
   ) {
     try {
       let res = await Swal.fire({
