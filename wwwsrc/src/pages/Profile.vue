@@ -124,14 +124,21 @@
         </div>
       </div>
     </div>
-    <div class="row w-75 offset-1">
+    <div class="row d-flex mt-4">
         <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
+    </div>
+    <div class="row ">
+      <div class="col-12 text-light text-center"><h1 class="my-4">Keeps</h1></div>
+      <div class="card-columns w-75 offset-1">
+        <KeepComponent v-for="keep in keeps" :key="keep.id" :keepProp="keep"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import VaultComponent from "../components/VaultComponent.vue";
+import KeepComponent from "../components/KeepComponent.vue";
 export default {
 name: "Profile",
 mounted(){
@@ -182,7 +189,8 @@ mounted(){
   },
   props: [""],
   components:{
-    VaultComponent
+    VaultComponent,
+    KeepComponent
   }
 };
 </script>

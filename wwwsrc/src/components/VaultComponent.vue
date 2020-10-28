@@ -1,5 +1,5 @@
 <template>
-<div class="col-2">
+<div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-4 ">
   <div class="card vault-card border-0 p-3 text-center" @click="openVault" >
     <h4 class="text-light">{{vaultProp.name}}</h4>
     <img class="card-img" src="../assets/vault.png" alt="">
