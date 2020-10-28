@@ -1,7 +1,7 @@
 <template>
   <div class="profile container-fluid">
     <div class="row">
-      <div class="col-12 d-flex flex-column align-items-center">
+      <div class="col-12 d-flex flex-column align-items-center text-light">
         <img :src="this.profile.picture" class="rounded" alt="">
         <h2>{{this.profile.name}}</h2>
           <p>Keeps: {{this.keeps.length}}  |  Vaults: {{this.vaults.length}}</p>
@@ -124,8 +124,10 @@
         </div>
       </div>
     </div>
-    <div class="row d-flex justify-content-around">
-    <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
+    <div class="row">
+      <div class="card-columns">
+        <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
+      </div>
     </div>
   </div>
 </template>

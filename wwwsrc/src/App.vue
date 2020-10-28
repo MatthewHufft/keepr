@@ -30,8 +30,8 @@ export default {
 @import "bootstrap";
 @import "./assets/_overrides.scss";
 .app-background{
-  background: rgb(238,244,249);
-  background: linear-gradient(127deg, rgba(238,244,249,1) 0%, rgba(231,236,240,1) 50%, rgba(238,244,249,1) 100%);
+  background: rgb(37, 38, 39);
+  // background: linear-gradient(127deg, rgba(238,244,249,1) 0%, rgba(231,236,240,1) 50%, rgba(238,244,249,1) 100%);
 }
 #app{
   min-height: 100vh;

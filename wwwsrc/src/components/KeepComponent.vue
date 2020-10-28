@@ -1,11 +1,11 @@
 <template>
-  <div class="card keep-card">
-    <div class="trans-box" role="button" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount"></div>
-    <div class="creator-deets d-flex">
-      <img class="avatar " :src="keepProp.creator.picture" alt="">
-      <p class="text-light ml-3 hide">{{keepProp.creator.name}}</p>
+  <div class="card keep-card border-0">
+    <img class="card-img " :src="keepProp.img" >
+    <div class="creator-deets d-flex text-light flex-column justify-content-end align-items-center overlay" data-toggle="modal" :data-target="'#keepModal'+ keepProp.id" @click="updateViewCount">
+      <h2 class="mb-auto hide text-shadow">{{keepProp.name}}</h2>
+      <img class="avatar hide mb-2 rounded-circle" :src="keepProp.creator.picture" alt="">
+      <p class=" ml-3 hide">{{keepProp.creator.name}}</p>
     </div>
-    <img class="card-img" :src="keepProp.img" >
     <div class="modal fade" :id="'keepModal'+ keepProp.id" tabindex="-1" :aria-labelledby="'#keepModal'+ keepProp.id + 'Label'" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -89,9 +89,15 @@ export default {
       update.views++;
       this.$store.dispatch("updateKeep", update)
     },
+    updateKeptCount(){
+      let update = this.keepProp
+      update.keeps++;
+      this.$store.dispatch("updateKeep", update)
+    },
     createVaultKeep(){
       this.newVK.keepId = this.keepProp.id;
       this.$store.dispatch("createVaultKeep", this.newVK);
+      this.updateKeptCount();
       this.newVK = {keepId: 0, vaultId: 0};
     },
     deleteVaultKeep(){
@@ -109,14 +115,18 @@ export default {
 </script>
 
 <style scoped>
-.keep-card{
-  position: relative;
+.text-shadow{
+  text-shadow: 2px 2px 6px #000000;
 }
+
 .card-img{
+  vertical-align: top;
   width:100%;
+  border-radius: 10px;
 }
 .avatar{
-  width: 15%;
+  height: 10%;
+  width: auto;
 }
 .creator-deets{
   position: absolute;
@@ -124,15 +134,30 @@ export default {
   bottom: 5px;
   left: 5px;
 }
-.trans-box{
-  position:absolute;
-  z-index: 1;
-  width: 100%;
-  height:100%;
+.hide{
+  display:none
 }
-.trans-box:hover{
-  background-color: rgba(7, 7, 7, 0.596);
+.keep-card{
+  position: relative;
+  display: inline-block;
+  background-color: rgba(128, 128, 128, 0);
+}
+.overlay{
+  transition: 400ms;
+}
+.keep-card:hover .overlay{
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.5);
+  border-radius: 10px;
+  position:absolute;
+  top:0;
+  left:0;
+  display:inline-block;
   cursor: pointer;
+}
+.keep-card:hover .hide{
+  display:inline-block;
 }
 
 
