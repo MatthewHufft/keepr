@@ -22,6 +22,10 @@ namespace Keepr.Services
     {
       Vault vault = _repo.GetById(vaultId);
       if (vault == null) { throw new Exception("Invalid Id"); }
+      if (userId != vault.CreatorId && vault.IsPrivate == true)
+      {
+        throw new Exception("Access Denied");
+      }
       return vault;
 
     }

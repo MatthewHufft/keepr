@@ -1,8 +1,15 @@
 <template>
   <div class="vault container-fluid">
-    <!-- <div class="no-content text-light mt-5" v-if="activeKeeps.length == 0">
-      <h1>Sorry, there's nothing here</h1>
-    </div> -->
+    <div class="row">
+      <div class="col-12 text-center text-light mt-3 " >
+        <h1>{{this.activeVault.name}}</h1>
+      </div>
+    </div>
+    <div class="row mt-5" v-if="activeKeeps.length == 0">
+      <div class="col-12 text-center text-light mt-5 "  >
+        <h1>Sorry, there's nothing here 😬</h1>
+      </div>
+    </div>
     <div class="row">
       <div class="card-columns w-75 offset-1">
         <KeepComponent v-for="keep in activeKeeps" :key="keep.id" :keepProp="keep"/>
@@ -26,7 +33,10 @@ name: "vault-details",
   computed:{
     activeKeeps(){
       return this.$store.state.activeKeeps;
-    }
+    },
+    activeVault(){
+      return this.$store.state.activeVault;
+    },
   },
   methods:{
 

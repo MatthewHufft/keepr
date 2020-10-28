@@ -11,7 +11,8 @@ export default new Vuex.Store({
     activeProfile: {},
     vaults: [],
     keeps: [],
-    activeKeeps: []
+    activeKeeps: [],
+    activeVault: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     setVaults(state, vaults){
       state.vaults = vaults
+    },
+    setActiveVault(state, vault){
+      state.activeVault = vault;
     },
     deleteVault(state, vault){
       state.vaults = state.vaults.filter(v => v.id != vault.id)
@@ -75,9 +79,10 @@ export default new Vuex.Store({
       try {
         let res = await api.get("vaults/" + vaultId);
         let userRes = await api.get("profiles");
-        if(res.data.isPrivate == true && userRes.data.id != res.data.CreatorId){
+        if(res.data.isPrivate == true && userRes.data.id != res.data.creatorId){
           router.push({ name: "Home" });
         }
+        commit("setActiveVault",res.data)
       } catch (error) {
         console.error(error);
       }

@@ -2,8 +2,9 @@
 <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-4 ">
   <div class="card vault-card border-0 p-3 text-center" @click="openVault" >
     <h4 class="text-light">{{vaultProp.name}}</h4>
-    <img class="card-img" src="../assets/vault.png" alt="">
+    <img class="card-img" src="../assets/vaultclosed.png" alt="">
     <div class="overlay p-3 hide">
+      <h4 class="text-light">{{vaultProp.name}}</h4>
       <img class="overlay-img hide" src="../assets/vault.png" alt="">
     </div>
     <!-- <i class="fa fa-times text-danger" v-if="this.$route.params.profileId == vaultProp.creatorId" aria-hidden="true" role="button" @click="deleteVault"></i> -->
@@ -49,7 +50,6 @@ name: "",
 }
 .overlay-img{
   width:100%;
-  height: auto;
 }
 .vault-card{
   position: relative;
@@ -80,8 +80,8 @@ name: "",
 .vault-card:hover .hide{
   display: inline-block
 }
-.vault-card:hover + .vault-img{
-  filter: grayscale(50%);
+.vault-card:hover .card-img{
+  filter: opacity(0%);
 }
 
 </style>
