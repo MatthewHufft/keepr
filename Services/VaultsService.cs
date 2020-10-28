@@ -22,7 +22,6 @@ namespace Keepr.Services
     {
       Vault vault = _repo.GetById(vaultId);
       if (vault == null) { throw new Exception("Invalid Id"); }
-      // if (vault.CreatorId != userId && vault.IsPrivate == true) { throw new Exception("Access Denied. That is private."); }
       return vault;
 
     }
@@ -56,9 +55,14 @@ namespace Keepr.Services
       return original;
     }
 
-    internal IEnumerable<Vault> GetVaultsByCreatorId(string id)
+    internal IEnumerable<Vault> GetVaultsByCreatorId(string profileId, string userId)
     {
-      return _repo.GetVaultsByCreatorId(id);
+      IEnumerable<Vault> vaults = _repo.GetVaultsByCreatorId(profileId);
+      if (profileId != userId)
+      {
+        return vaults.ToList().FindAll(v => v.IsPrivate == false);
+      }
+      return vaults;
     }
   }
 }

@@ -72,7 +72,7 @@ namespace Keepr.Controllers
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         Profile queryProfile = _ps.GetProfileById(id);
-        return Ok(_vs.GetVaultsByCreatorId(queryProfile.Id));
+        return Ok(_vs.GetVaultsByCreatorId(queryProfile.Id, userInfo.Id));
       }
       catch (Exception e)
       {

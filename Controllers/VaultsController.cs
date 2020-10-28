@@ -50,10 +50,12 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{id}/keeps")] // get keeps by vault Id:  api/vaults/{id}/keeps : Many to Many relationship est.
-    public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeeps(int id)
+    public async Task<ActionResult<IEnumerable<VaultKeepViewModel>>> GetKeepsAsync(int id)
     {
       try
       {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        Vault vault = _service.GetById(userInfo?.Id, id);
         IEnumerable<VaultKeepViewModel> keeps = _keepService.GetKeepsByVaultId(id);
         return Ok(keeps);
       }

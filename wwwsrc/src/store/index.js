@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router/index.js"
 import { api } from "../services/AxiosService.js";
 
 Vue.use(Vuex);
@@ -66,6 +67,17 @@ export default new Vuex.Store({
       try {
         let res = await api.get("keeps");
         commit("setKeeps",res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getVault({commit}, vaultId) {
+      try {
+        let res = await api.get("vaults/" + vaultId);
+        let userRes = await api.get("profiles");
+        if(res.data.isPrivate == true && userRes.data.id != res.data.CreatorId){
+          router.push({ name: "Home" });
+        }
       } catch (error) {
         console.error(error);
       }
