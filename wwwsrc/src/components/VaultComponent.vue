@@ -61,10 +61,12 @@ name: "",
 }
 
 .overlay{
-  transition: 400ms;
+  animation-name: fadeIn;
+  animation-duration:300ms;
   width:100%;
   height:100%;  
 }
+
 .vault-card:hover .overlay{
   z-index: 2;
   background:rgba(0,0,0,.5);
@@ -80,8 +82,13 @@ name: "",
 .vault-card:hover .hide{
   display: inline-block
 }
-.vault-card:hover .card-img{
-  filter: opacity(0%);
+
+@keyframes fadeIn{
+  0% {filter: opacity(0%);}
+  25% {filter: opacity(25%);}
+  50% {filter: opacity(50%);}
+  75% {filter: opacity(75%);}
+  100% {filter: opacity(100%);}
 }
 
 </style>

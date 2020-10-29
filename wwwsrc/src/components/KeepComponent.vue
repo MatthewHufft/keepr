@@ -15,7 +15,7 @@
               <i  class="fa fa-ellipsis-v btn big-button" aria-hidden="true" role="button" data-toggle="dropdown"></i>
               <div class="dropdown-menu ml-1 text-center">
                 <p v-if="this.$route.name == 'VaultDetails'" class="btn" @click="deleteVaultKeep">Remove Keep</p>
-                <p v-if="this.$route.name == 'Home' && this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
+                <p v-if="this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
               </div>
             </div>
             <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">

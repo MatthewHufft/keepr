@@ -124,7 +124,7 @@
         </div>
       </div>
     </div>
-    <div class="row d-flex mt-4">
+    <div class="row d-flex justify-content-around mt-4">
         <VaultComponent v-for="vault in vaults" :key="vault.id" :vaultProp="vault"/>
     </div>
     <div class="row ">
