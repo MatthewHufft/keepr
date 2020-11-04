@@ -1,8 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg d-flex justify-content-between sticky-top">
+  <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between sticky-top">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex align-items-center">
           <img src="../assets/lock.png" width="50px" alt="lockLogo">
+          <h2>Keeper</h2>
         </div>
       </router-link>
       
