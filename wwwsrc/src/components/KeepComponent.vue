@@ -18,9 +18,6 @@
                 <p v-if="this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
               </div>
             </div>
-            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> -->
           </div>
           <div class="modal-body">
             <div class="row">
