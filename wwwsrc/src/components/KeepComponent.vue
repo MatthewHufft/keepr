@@ -9,17 +9,17 @@
     <div class="modal fade" :id="'keepModal'+ keepProp.id" tabindex="-1" :aria-labelledby="'#keepModal'+ keepProp.id + 'Label'" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header modal-style text-light">
             <h5 class="modal-title" :id="'#keepModal'+ keepProp.id + 'Label'">{{keepProp.name}}</h5>
             <div class="btn-group dropright">
-              <i  class="fa fa-ellipsis-v btn big-button" aria-hidden="true" role="button" data-toggle="dropdown"></i>
+              <i  class="fa fa-ellipsis-v btn big-button text-light" aria-hidden="true" role="button" data-toggle="dropdown"></i>
               <div class="dropdown-menu ml-1 text-center">
                 <p v-if="this.$route.name == 'VaultDetails'" class="btn" @click="deleteVaultKeep">Remove Keep</p>
                 <p v-if="this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
               </div>
             </div>
           </div>
-          <div class="modal-body">
+          <div class="modal-body text-light modal-style">
             <div class="row">
               <div class="col-8">
                 <img :src="keepProp.img" alt="" width="100%">
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer justify-content-between">
+          <div class="modal-footer justify-content-between text-light modal-style">
             <div class="d-flex" @click="viewProfile">
               <img :src="keepProp.creator.picture" alt="" width="25%">
               <p class="align-self-end ml-1">{{keepProp.creator.name}}</p> 
@@ -163,5 +163,9 @@ export default {
   display:inline-block;
 }
 
+.modal-style{
+  background-color: rgb(54, 54, 54);
+  
+}
 
 </style>
