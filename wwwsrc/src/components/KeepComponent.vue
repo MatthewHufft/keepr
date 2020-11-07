@@ -11,11 +11,11 @@
         <div class="modal-content">
           <div class="modal-header modal-style text-light">
             <h5 class="modal-title" :id="'#keepModal'+ keepProp.id + 'Label'">{{keepProp.name}}</h5>
-            <div class="btn-group dropright">
-              <i  class="fa fa-ellipsis-v btn big-button text-light" aria-hidden="true" role="button" data-toggle="dropdown"></i>
+            <div class="btn-group dropright" v-show="this.profile.id == this.keepProp.creatorId || this.$route.name == 'VaultDetails'" >
+              <i  class="fa fa-ellipsis-v btn big-button text-light"  aria-hidden="true" role="button" data-toggle="dropdown"></i>
               <div class="dropdown-menu ml-1 text-center">
                 <p v-if="this.$route.name == 'VaultDetails'" class="btn" @click="deleteVaultKeep">Remove Keep</p>
-                <p v-if="this.profile.id == this.keepProp.creatorId" class="btn" @click="deleteKeep">Delete Keep</p>
+                <p v-else class="btn" @click="deleteKeep">Delete Keep</p>
               </div>
             </div>
           </div>
