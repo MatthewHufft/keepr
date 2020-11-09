@@ -41,7 +41,7 @@
           </div>
           <div class="modal-footer justify-content-between text-light modal-style">
             <div class="d-flex pointer" @click="viewProfile">
-              <img :src="keepProp.creator.picture" alt="" width="25%">
+              <img class="rounded-circle" :src="keepProp.creator.picture" alt="" width="25%">
               <p class="align-self-end ml-1">{{keepProp.creator.name}}</p> 
             </div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
