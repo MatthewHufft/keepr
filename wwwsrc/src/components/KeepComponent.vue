@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="modal-footer justify-content-between text-light modal-style">
-            <div class="d-flex" @click="viewProfile">
+            <div class="d-flex pointer" @click="viewProfile">
               <img :src="keepProp.creator.picture" alt="" width="25%">
               <p class="align-self-end ml-1">{{keepProp.creator.name}}</p> 
             </div>
@@ -112,6 +112,10 @@ export default {
 </script>
 
 <style scoped>
+
+.pointer{
+  cursor:pointer;
+}
 .text-shadow{
   text-shadow: 2px 2px 6px #000000;
 }
